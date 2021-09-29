@@ -27,30 +27,28 @@ public class MonumentoController {
     @GetMapping("/")
     public ResponseEntity<List<GetMonumentoDto>> findAll() {
 
-        /*return ResponseEntity
-                .ok()
-                .body(repository.findAll());*/
+        List<Monumento> data = repository.findAll();
 
-        List<GetMonumentoDto> result =
-                repository
-                .findAll()
-                .stream()
-                .map(dtoConverter::monumentoToGetMonumentoDto)
-                .collect(Collectors.toList());
+        if (data.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            List<GetMonumentoDto> result =
+                    data.stream()
+                    .map(dtoConverter::monumentoToGetMonumentoDto)
+                    .collect(Collectors.toList());
 
-        return ResponseEntity
-                .ok()
-                .body(result);
+            return ResponseEntity
+                    .ok()
+                    .body(result);
+
+        }
+
+
 
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Monumento> findOne(@PathVariable Long id) {
-
-        /*return ResponseEntity
-                .ok()
-                .body(repository.findById(id).orElse(null));
-        */
 
         return ResponseEntity
                 .of(repository.findById(id));
@@ -61,6 +59,10 @@ public class MonumentoController {
     @PostMapping("/")
     //public ResponseEntity<Monumento> create(@RequestBody Monumento nuevo) {
     public ResponseEntity<Monumento> create(@RequestBody CreateMonumentoDto dto) {
+
+        if (dto.getCategoriaId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
 
         Monumento nuevo = dtoConverter.createMonumentoDtoToMonumento(dto);
@@ -80,6 +82,7 @@ public class MonumentoController {
     public ResponseEntity<Monumento> edit(
             @RequestBody Monumento e,
             @PathVariable Long id) {
+
 
         return ResponseEntity.of(
             repository.findById(id).map(m -> {
