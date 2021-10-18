@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "293d6856-6e31-44df-86ae-304b73516cc7",
+		"name": "E02_Monumentos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Nuevo Monumento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigoPais\": \"es\",\r\n    \"pais\": \"España\",\r\n    \"ciudad\": \"Úbeda\",\r\n    \"loc\": \"38.0079897,-3.3667641\",\r\n    \"precio\": 5,\r\n    \"nombre\": \"Sacra Capilla del Salvador\",\r\n    \"descripcion\": \"Lorem ipsul dolor sit amet\",\r\n    \"urlImagen\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ubeda_-_Capilla_del_Salvador_42.jpg/1200px-Ubeda_-_Capilla_del_Salvador_42.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/monumento/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monumento",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Listar todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monumento/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monumento",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Un monumento por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monumento/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monumento",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Editar monumento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigoPais\": \"es\",\r\n    \"pais\": \"España\",\r\n    \"ciudad\": \"Úbeda\",\r\n    \"loc\": \"38.0079897,-3.3667641\",\r\n    \"nombre\": \"Sacra Capilla del Salvador\",\r\n    \"descripcion\": \"Monumento funerario de don Diego de Los Cobos\",\r\n    \"urlImagen\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ubeda_-_Capilla_del_Salvador_42.jpg/1200px-Ubeda_-_Capilla_del_Salvador_42.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/monumento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monumento",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Borrar monumento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monumento/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monumento",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
