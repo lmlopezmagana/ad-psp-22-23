@@ -20,7 +20,7 @@ public class Alumno implements Serializable {
     private String nombre, apellidos, email;
 
     @ManyToOne
-    //@JoinColumn(name = "curso", foreignKey = @ForeignKey(name = "FK_ALUMNO_CURSO"))
+    @JoinColumn(name = "curso", foreignKey = @ForeignKey(name = "FK_ALUMNO_CURSO"))
     private Curso curso;
 
     @ManyToMany
