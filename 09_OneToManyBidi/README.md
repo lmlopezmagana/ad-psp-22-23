@@ -6,7 +6,7 @@
 Normalmente, cuando se estudia UML, se suelen aprender las asociaciones y su multiplicidad (en ocasiones, conocida como _cardinalidad_ ) sin tener en cuenta la dirección. Por ejemplo, en el siguiente
 diagrama:
 
-![Diagrama](./uml.jpg)
+![Diagrama](../08_ManyToOne/uml.jpg)
 
 La asociación `está-en` entre las clases `Alumno` y `Curso` se suele decir que es una asociación _uno a muchos_. Sin embargo, viendo el ejemplo 7, hemos comprobado que depende de la forma en que leamos la asociación, será de un tipo u otro:
 
