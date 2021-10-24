@@ -500,7 +500,7 @@ public class Grupo {
 De esta forma, podríamos obtener todo con una sola consulta (Grupo -> Usuarios -> Direcciones -> Ciudades)
 
 
-## Grafos de entidad "sin nombre" (grafos programáticos)
+## Grafos de entidad "sin nombre"
 
 Al igual que sucede con las consultas, no todos los grafos de entidad tienen que estar definidos como `@NamedEntityGraph`. Spring Data JPA nos permite definir grafos de entidad directamente en una consulta, a través de la anotación `@EntityGraph` en el repositorio. Para ello, tenemos la propiedad `attributePaths`, que nos permite indicar el atributo que se quiere conectar a través del grafo.
 
