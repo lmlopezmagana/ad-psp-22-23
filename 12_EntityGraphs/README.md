@@ -246,7 +246,7 @@ public class Direccion {
 }
 ```
 
-Con una estrategia **estática** de tipo LAZY, podemos definir un grafo de entidad, llamado `grafo-direccion-ciudad-usuario`. Este grafo de entidad contiene los atributos ciudad y el usuario, por tanto, estos objetos serán tomados de la base de datos conjuntamente con la direccion. **Si queremos obtener estos atributos, el método `findAll` ya no nos sirve, puesto que ejecutaría el _fetch plan_ de tipo LAZY. Para asignar el grafo de entidad con nombre a una consulta tenemos dos estrategias:
+Con una estrategia **estática** de tipo LAZY, podemos definir un grafo de entidad, llamado `grafo-direccion-ciudad-usuario`. Este grafo de entidad contiene los atributos ciudad y el usuario, por tanto, estos objetos serán tomados de la base de datos conjuntamente con la direccion. **Si queremos obtener estos atributos, el método `findAll` ya no nos sirve, puesto que ejecutaría el _fetch plan_ de tipo LAZY.** Para asignar el grafo de entidad con nombre a una consulta tenemos dos estrategias:
 
 - Spring Data JPA: hacerlo a través de la anotación `@EntityGraph` en los repositorios.
 - JPA: hacerlo programáticamente a través de `EntityManager`.
