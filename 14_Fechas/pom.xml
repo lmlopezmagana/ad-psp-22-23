@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salesianostriana.dam</groupId>
-	<artifactId>10_ManyToManyUni</artifactId>
+	<artifactId>14_Fechas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>10_ManyToManyUni</name>
+	<name>14_Fechas</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
