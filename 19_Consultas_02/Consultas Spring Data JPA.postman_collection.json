@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "40d4f445-1c8d-4ec5-8917-a383c4004e58",
+		"name": "Consultas Spring Data JPA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Todos los cursos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/curso/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"curso",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Un curso por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/curso/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"curso",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Cursos filtrando por nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/curso/?nombre=DAM",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"curso",
+						""
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "DAM"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Todos los alumnos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/alumno/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"alumno",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Alumnos de un curso nacidos después de una fecha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/alumno/curso/1º dam/nacido/1970-01-01",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"alumno",
+						"curso",
+						"1º dam",
+						"nacido",
+						"1970-01-01"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
