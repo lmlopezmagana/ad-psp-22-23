@@ -1,8 +1,8 @@
 package com.salesianostriana.dam.controller;
 
-import com.salesianostriana.dam.dto.CursoDtoConverter;
-import com.salesianostriana.dam.dto.GetCursoConAlumnosDto;
-import com.salesianostriana.dam.dto.GetCursoDto;
+import com.salesianostriana.dam.dto.curso.CursoDtoConverter;
+import com.salesianostriana.dam.dto.curso.GetCursoConAlumnosDto;
+import com.salesianostriana.dam.dto.curso.GetCursoDto;
 import com.salesianostriana.dam.model.Curso;
 import com.salesianostriana.dam.service.CursoService;
 import lombok.RequiredArgsConstructor;
