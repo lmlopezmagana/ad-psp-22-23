@@ -34,4 +34,8 @@ public class Alumno implements Serializable {
     private LocalDateTime fechaUltimaEdicion;
 
 
+    @OrderBy
+    @Column(name="orden")
+    private int order;
+
 }
