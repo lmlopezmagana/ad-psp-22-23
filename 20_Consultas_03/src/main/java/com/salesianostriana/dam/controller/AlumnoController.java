@@ -32,7 +32,7 @@ public class AlumnoController {
 
     @GetMapping("/")
     public ResponseEntity<List<?>> todos() {
-        return buildResponseFromQuery(servicio.findAll(), dtoConverter::convertAlumnoToGetAlumnoDto);
+        return buildResponseFromQuery(servicio.findAll(), dtoConverter::convertAlumnoToGetAlumnoSinCursoDto);
     }
 
 

@@ -16,7 +16,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             select new com.salesianostriana.dam.dto.GetProductoDto(
                 p.id, p.nombre, c.nombre
             )
-            from Producto p JOIN p.categoria c
+            from Producto p LEFT JOIN p.categoria c
             """)
     List<GetProductoDto> todosLosProductosDto();
 
@@ -24,7 +24,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             select new com.salesianostriana.dam.dto.GetProductoConPrecioDto(
                 p.id, p.nombre, c.nombre, p.precio
             )
-            from Producto p JOIN p.categoria c
+            from Producto p LEFT JOIN p.categoria c
             where p.precio <= :precio
             """)
     List<GetProductoConPrecioDto> precioMenorQue(@Param("precio") Double precio);
