@@ -29,3 +29,9 @@ Este repositorio sirve como soporte a la docencia de los citados módulos en el 
 - [Ejemplo 19](https://github.com/lmlopezmagana/ad-psp-21-22/tree/main/19_Consultas_02): Consultas con JPQL
 - [Ejemplo 20](https://github.com/lmlopezmagana/ad-psp-21-22/tree/main/20_Consultas_03): Uso de Specification. Cómo realizar consultas dinámicas desde un controlador.
 - [Ejemplo 21](https://github.com/lmlopezmagana/ad-psp-21-22/tree/main/21_Consultas_04): Consultas con proyección que devuelven directamente un DTO. 
+
+## Tema 3 - Seguridad I. JWT.
+
+En este tema se utiliza un ejemplo con diferentes commits.
+
+
