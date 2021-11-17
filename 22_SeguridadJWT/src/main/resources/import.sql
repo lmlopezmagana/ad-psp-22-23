@@ -1,0 +1,10 @@
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Soup Campbells - Tomato Bisque', 7.83);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Thyme - Fresh', 9.24);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Coriander - Seed', 9.9);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Oxtail - Cut', 1.41);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Sprouts - Baby Pea Tendrils', 1.34);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Table Cloth 144x90 White', 3.22);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Beef - Cooked, Corned', 8.45);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Lobster - Base', 1.78);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Wine - White Cab Sauv.on', 1.69);
+insert into producto (id, nombre, precio) values (NEXTVAL('hibernate_sequence'), 'Kellogs All Bran Bars', 8.06);

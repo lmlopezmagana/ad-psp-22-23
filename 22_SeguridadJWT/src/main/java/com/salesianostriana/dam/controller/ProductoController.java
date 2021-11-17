@@ -18,7 +18,7 @@ public class ProductoController {
     private final ProductoService productoService;
 
     // Este método se podría paginar, incluir parámetros de filtro, ...
-    @GetMapping()
+    @GetMapping("/")
     public ResponseEntity<List<Producto>> buscarTodos() {
 
         List<Producto> result = productoService.findAll();
@@ -39,7 +39,7 @@ public class ProductoController {
     }
 
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Producto> nuevoProducto(@RequestBody Producto producto) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(producto));

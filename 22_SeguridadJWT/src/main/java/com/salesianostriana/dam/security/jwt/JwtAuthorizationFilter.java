@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.security;
+package com.salesianostriana.dam.security.jwt;
 
 import com.salesianostriana.dam.users.model.UserEntity;
 import com.salesianostriana.dam.users.services.UserEntityService;
@@ -6,9 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -61,7 +58,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         } catch (Exception ex) {
             // Informar en el log
-            log.info("No se ha podido establecer el contexto de seguridad");
+            log.info("No se ha podido establecer el contexto de seguridad (" + ex.getMessage() + ")");
         }
 
         filterChain.doFilter(request, response);

@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.security;
+package com.salesianostriana.dam.security.dto;
 
 import lombok.*;
 

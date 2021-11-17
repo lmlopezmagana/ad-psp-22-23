@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.security;
+package com.salesianostriana.dam.security.jwt;
 
 import com.salesianostriana.dam.users.model.UserEntity;
 import io.jsonwebtoken.*;
@@ -58,7 +58,7 @@ public class JwtProvider {
                 .setIssuedAt(tokenExpirationDate)
                 .claim("fullname", user.getFullName())
                 .claim("role", user.getRole().name())
-                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()), SignatureAlgorithm.HS512)
+                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .compact();
 
 
@@ -66,8 +66,7 @@ public class JwtProvider {
 
     public Long getUserIdFromJwt(String token) {
 
-        Claims claims = (Claims) parser.parseClaimsJwt(token);
-        return Long.valueOf(claims.getSubject());
+        return Long.valueOf(parser.parseClaimsJws(token).getBody().getSubject());
 
 
     }
@@ -75,7 +74,7 @@ public class JwtProvider {
     public boolean validateToken(String token) {
 
         try {
-            parser.parseClaimsJwt(token);
+            parser.parseClaimsJws(token);
             return true;
         } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
             log.info("Error con el token: " + ex.getMessage());
