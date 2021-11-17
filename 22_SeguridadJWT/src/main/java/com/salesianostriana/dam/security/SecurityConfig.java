@@ -46,6 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/producto/**").hasRole("ADMIN");
 
+        // TODO Falta añadir el manejador de tipo AccessDeniedHandler
+
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
     }

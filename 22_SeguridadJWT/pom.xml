@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salesianostriana.dam</groupId>
-	<artifactId>21_SeguridadJWT</artifactId>
+	<artifactId>22_SeguridadJWT</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>21_SeguridadJWT</name>
+	<name>22_SeguridadJWT</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
