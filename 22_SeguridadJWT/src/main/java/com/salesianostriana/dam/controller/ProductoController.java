@@ -6,6 +6,7 @@ import com.salesianostriana.dam.services.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class ProductoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(producto));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Producto> editarProducto(@RequestBody Producto aEditar, @PathVariable Long id) {
 
