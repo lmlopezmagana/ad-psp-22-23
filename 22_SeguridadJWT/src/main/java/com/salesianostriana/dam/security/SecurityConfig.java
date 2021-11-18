@@ -52,9 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/producto/**").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/auth/**").anonymous()
+                    .antMatchers("/h2-console/**").permitAll()
                     .anyRequest().authenticated();
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
+        // Para dar acceso a h2
+        http.headers().frameOptions().disable();
+
 
     }
 

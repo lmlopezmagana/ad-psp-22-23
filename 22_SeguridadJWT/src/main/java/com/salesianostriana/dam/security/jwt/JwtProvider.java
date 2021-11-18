@@ -10,13 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
 import java.util.Date;
+import java.util.UUID;
 
 @Log
 @Service
@@ -54,7 +51,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setHeaderParam("typ", TOKEN_TYPE)
-                .setSubject(Long.toString(user.getId()))
+                .setSubject(user.getId().toString())
                 .setIssuedAt(tokenExpirationDate)
                 .claim("fullname", user.getFullName())
                 .claim("role", user.getRole().name())
@@ -64,12 +61,17 @@ public class JwtProvider {
 
     }
 
-    public Long getUserIdFromJwt(String token) {
+    /*public Long getUserIdFromJwt(String token) {
 
         return Long.valueOf(parser.parseClaimsJws(token).getBody().getSubject());
 
 
     }
+     */
+    public UUID getUserIdFromJwt(String token) {
+        return UUID.fromString(parser.parseClaimsJws(token).getBody().getSubject());
+    }
+
 
     public boolean validateToken(String token) {
 
