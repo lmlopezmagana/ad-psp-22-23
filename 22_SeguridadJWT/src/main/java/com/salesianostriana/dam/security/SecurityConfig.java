@@ -52,8 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/producto/**").hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/auth/**").anonymous()
-                    .antMatchers("/h2-console/**").permitAll()
+                    .antMatchers("/h2-console/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                     .anyRequest().authenticated();
+
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 

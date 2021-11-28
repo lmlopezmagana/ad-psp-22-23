@@ -32,6 +32,9 @@ Este repositorio sirve como soporte a la docencia de los citados módulos en el 
 
 ## Tema 3 - Seguridad I. JWT.
 
-En este tema se utiliza un ejemplo con diferentes commits.
+- [Ejemplo 22](https://github.com/lmlopezmagana/ad-psp-21-22/tree/main/22_SeguridadJWT): En este tema se utiliza un ejemplo con diferentes tags. Se pueden consultar desde la versión v1.0 a la v.2.2
 
+## Tema 4 - Validación y gestión de errores
 
+- [Ejemplo 23](): Validación
+- [Ejemplo 24](): Se trata de un remix del ejemplo de seguridad [Ejemplo 22](https://github.com/lmlopezmagana/ad-psp-21-22/tree/main/22_SeguridadJWT) y el ejemplo ... 
