@@ -31,7 +31,8 @@ public class VentaServicio {
                 .map(producto -> new LineaDeVenta(producto, productos.get(producto.getCodigoProducto()), producto.getPrecio()))
                 .forEach(v::addLineaVenta);
 
-        return v;
+       ventaRepositorio.save(v);
+       return v;
     }
 
 
