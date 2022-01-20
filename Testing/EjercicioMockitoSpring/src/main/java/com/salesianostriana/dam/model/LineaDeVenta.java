@@ -2,6 +2,7 @@ package com.salesianostriana.dam.model;
 
 import lombok.*;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
+@Entity
 public class LineaDeVenta {
 
     @Id @GeneratedValue

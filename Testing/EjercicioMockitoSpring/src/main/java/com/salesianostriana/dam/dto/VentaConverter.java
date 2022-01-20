@@ -2,10 +2,12 @@ package com.salesianostriana.dam.dto;
 
 import com.salesianostriana.dam.model.LineaDeVenta;
 import com.salesianostriana.dam.model.Venta;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class VentaConverter {
 
     public GetProductoCantidadPrecioDto lineaDeVentaToGetProductoCantidadPrecioDto(LineaDeVenta lv) {

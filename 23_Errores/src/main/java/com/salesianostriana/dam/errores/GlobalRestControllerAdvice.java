@@ -16,20 +16,37 @@ public class GlobalRestControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({EntityNotFoundException.class})
     public ResponseEntity<?> handleNotFoundException(EntityNotFoundException ex, WebRequest request) {
-        return buildApiError(ex, request);
+        return buildApiError(HttpStatus.NOT_FOUND, ex, request);
     }
 
-
+    /*
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return buildApiError(ex, request);
     }
 
+    */
 
-    private final ResponseEntity<Object> buildApiError(Exception ex, WebRequest request) {
+
+    @Override
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        //return super.handleExceptionInternal(ex, body, headers, status, request);
+
+        ApiError error = ApiError.builder()
+                .estado(status)
+                .codigo(status.value())
+                .ruta(((ServletWebRequest)request).getRequest().getRequestURI())
+                .mensaje(ex.getMessage())
+                .build();
+
+        return ResponseEntity.status(status).body(error);
+
+    }
+
+    private final ResponseEntity<Object> buildApiError(HttpStatus status, Exception ex, WebRequest request) {
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()));
+                .status(status)
+                .body(new ApiError(status, ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI()));
 
     }
 
