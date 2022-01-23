@@ -21,7 +21,7 @@ public class SpringSecurityTestWebConfig {
         UserEntity admin = UserEntity.builder()
                 .username("admin")
                 .password("admin")
-                .roles(Set.of(UserRole.ADMIN))
+                .roles(Set.of(UserRole.ADMIN, UserRole.USER))
                 .build();
 
         UserEntity user = UserEntity.builder()

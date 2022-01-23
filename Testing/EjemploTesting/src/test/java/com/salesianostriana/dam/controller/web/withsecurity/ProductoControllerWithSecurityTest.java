@@ -1,8 +1,8 @@
 package com.salesianostriana.dam.controller.web.withsecurity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesianostriana.dam.controller.web.configuration.RestResponsePage;
 import com.salesianostriana.dam.controller.web.configuration.SpringSecurityTestWebConfig;
-import com.salesianostriana.dam.controller.web.configuration.WebConfig;
 import com.salesianostriana.dam.dto.CreateProductoDTO;
 import com.salesianostriana.dam.dto.ProductoDTO;
 import com.salesianostriana.dam.dto.converter.ProductoDTOConverter;
@@ -10,48 +10,43 @@ import com.salesianostriana.dam.modelo.Categoria;
 import com.salesianostriana.dam.modelo.Producto;
 import com.salesianostriana.dam.service.ProductoServicio;
 import com.salesianostriana.dam.util.pagination.PaginationLinksUtils;
+import lombok.extern.java.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.mock.web.MockMultipartHttpServletRequest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import static com.salesianostriana.dam.controller.utils.ResponseBodyMatchers.responseBody;
-import static org.hamcrest.Matchers.*;
-
 
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static com.salesianostriana.dam.controller.utils.ResponseBodyMatchers.responseBody;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//@WebMvcTest(controllers = ProductoController.class)
-@SpringBootTest
+@Log
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {SpringSecurityTestWebConfig.class})
 @AutoConfigureMockMvc
-@Import({ SpringSecurityTestWebConfig.class, WebConfig.class })
-@ExtendWith(MockitoExtension.class)
 class ProductoControllerWithSecurityTest {
 
     @Autowired
@@ -71,7 +66,8 @@ class ProductoControllerWithSecurityTest {
 
     Producto producto;
     ProductoDTO productoDTO;
-    Page result1element;
+    Page result1element, result1elementDto;
+
 
     @BeforeEach
     void initTest() {
@@ -90,28 +86,37 @@ class ProductoControllerWithSecurityTest {
                 .imagen("http://")
                 .build();
 
-        result1element = new PageImpl(List.of(productoDTO));
+        result1element = new RestResponsePage(List.of(producto));
+
+
+        result1elementDto = new RestResponsePage(List.of(productoDTO));
+
 
     }
 
 
     @Test
-    @WithMockUser(username = "admin", password = "admin")
+    //@WithUserDetails(value="admin", userDetailsServiceBeanName = "customUserDetailsService")
+    @WithUserDetails("admin")
     @DisplayName("GET /producto/ sin parámetros de filtrado")
     void whenValidRequestWithAdmin_thenReturns200() throws Exception {
 
-        when(productoServicio.findByArgs(any(Optional.class),any(Optional.class), any(Pageable.class)))
-                .thenReturn(new PageImpl<>(List.of(producto)));
+        when(productoServicio.findByArgs(eq(Optional.empty()), eq(Optional.empty()), any(Pageable.class)))
+                        .thenReturn(result1element);
+
 
         when(productoDTOConverter.convertToDto(producto)).thenReturn(productoDTO);
 
 
 
-        mockMvc.perform(get("/producto/"))
+        MvcResult result =  mockMvc.perform(get("/producto/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].id", is(1)))
-                .andExpect(jsonPath("$.content", hasSize(1)));
-                //.andExpect(responseBody().containsObjectAsJson(result, RestResponsePage.class)); // No funciona como se espera con Page
+                .andExpect(jsonPath("$.content", hasSize(1)))
+                .andExpect(content().json(objectMapper.writeValueAsString(result1elementDto)))
+                .andReturn();
+
+        log.info(result.getResponse().getContentAsString());
 
     }
 
