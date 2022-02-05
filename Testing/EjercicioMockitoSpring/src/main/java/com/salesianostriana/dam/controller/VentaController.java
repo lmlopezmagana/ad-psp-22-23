@@ -36,7 +36,7 @@ public class VentaController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ventaConverter.ventaToGetVentaDto(ventaServicio.nuevaVenta(productos, cliente)));
-        
+
 
     }
 
