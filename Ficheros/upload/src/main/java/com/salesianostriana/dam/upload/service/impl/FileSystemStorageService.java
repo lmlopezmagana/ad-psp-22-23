@@ -4,6 +4,7 @@ import com.salesianostriana.dam.upload.config.StorageProperties;
 import com.salesianostriana.dam.upload.exception.FileNotFoundException;
 import com.salesianostriana.dam.upload.exception.StorageException;
 import com.salesianostriana.dam.upload.service.StorageService;
+import com.salesianostriana.dam.upload.utils.MediaTypeUrlResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -102,7 +103,7 @@ public class FileSystemStorageService implements StorageService {
 
         try {
             Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
+            MediaTypeUrlResource resource = new MediaTypeUrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             }

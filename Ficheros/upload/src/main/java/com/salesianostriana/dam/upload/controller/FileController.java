@@ -2,10 +2,11 @@ package com.salesianostriana.dam.upload.controller;
 
 import com.salesianostriana.dam.upload.dto.FileResponse;
 import com.salesianostriana.dam.upload.service.StorageService;
+import com.salesianostriana.dam.upload.utils.MediaTypeUrlResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,11 +44,11 @@ public class FileController {
 
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-        Resource resource = storageService.loadAsResource(filename);
+        MediaTypeUrlResource resource = (MediaTypeUrlResource) storageService.loadAsResource(filename);
 
 
         return ResponseEntity.status(HttpStatus.OK)
-                //.header("content-type", MediaType.parseMediaType(resource))
+                .header("content-type", resource.getType())
                 .body(resource);
 
 
