@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.upload.service.impl;
 
 import com.salesianostriana.dam.upload.dto.CreateProductoDto;
+import com.salesianostriana.dam.upload.image.ImageScaler;
 import com.salesianostriana.dam.upload.model.Producto;
 import com.salesianostriana.dam.upload.model.ProductoRepository;
 import com.salesianostriana.dam.upload.service.ProductoService;
@@ -18,10 +19,13 @@ public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository repository;
     private final StorageService storageService;
+    private final ImageScaler imageScaler;
 
     @Override
     public Producto save(CreateProductoDto createProductoDto, MultipartFile file) {
 
+        // 1. Escalar la imagen
+        // 2. Guardar el fichero.
         String filename = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
