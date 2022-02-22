@@ -23,4 +23,6 @@ public class Producto {
 
     private String imagen;
 
+    private String thumbnail;
+
 }
