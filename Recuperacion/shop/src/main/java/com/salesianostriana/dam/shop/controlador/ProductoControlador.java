@@ -4,6 +4,7 @@ package com.salesianostriana.dam.shop.controlador;
 import com.salesianostriana.dam.shop.modelo.Producto;
 import com.salesianostriana.dam.shop.repositorio.ProductoRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,25 @@ public class ProductoControlador {
     public ResponseEntity<List<Producto>> todosLosProductos() {
         //return repositorio.findAll();
 
-        List<Producto> result = repositorio.findAll();
+        //List<Producto> result = repositorio.findAll();
+        List<Producto> result = repositorio.findAll(Sort.by("nombre"));
 
         if (result.isEmpty())
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/menos-de/{precio}")
+    public ResponseEntity<List<Producto>> productosMenosXEuros(@PathVariable double precio) {
+        List<Producto> result =
+                repositorio.findByPrecioLessThan(precio);
+
+        if (result.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(result);
+
     }
 
     @GetMapping("/{id}")

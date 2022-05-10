@@ -29,6 +29,12 @@ public class InitData {
                 .precio(1.25)
                 .build();
 
+        Producto p3 = Producto.builder()
+                .nombre("Paquete 500 folios")
+                .precio(8.0)
+                .build();
+
+        repositorio.save(p3);
         repositorio.save(p1);
         repositorio.save(p2);
 
