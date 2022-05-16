@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 //@Data Getter+Setter+EqualsHasChode+ToString+RequiredArgsConstructor
@@ -26,4 +27,9 @@ public class Producto {
     private double precio;
 
     private String imagen;
+
+    @ManyToOne
+    private Categoria categoria;
+
+
 }

@@ -10,6 +10,7 @@ public interface ProductoRepositorio
 
     List<Producto> findByPrecioLessThan(double precio);
 
+    List<Producto> findByNombreContainsIgnoreCase(String nombre);
 
 
 }

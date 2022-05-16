@@ -44,6 +44,18 @@ public class ProductoControlador {
 
     }
 
+    @GetMapping("/nombre/{nom}")
+    public ResponseEntity<List<Producto>> productosPorNombre(@PathVariable("nom") String nombre) {
+        List<Producto> result =
+                repositorio.findByNombreContainsIgnoreCase(nombre);
+
+        if (result.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(result);
+
+    }
+
     @GetMapping("/{id}")
     //public Producto unProductoPorId(@PathVariable Long id) {
     public ResponseEntity<Producto> unProductoPorId(@PathVariable Long id) {
