@@ -27,19 +27,15 @@ public class ConfiguracionSeguridad
     private final JwtAccessDeniedHandler accessDeniedHandler;
     private final JwtAuthorizationFilter filter;
     private final JwtAuthenticationEntryPoint entryPoint;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(PasswordEncoderFactories
-                                    .createDelegatingPasswordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories
-                .createDelegatingPasswordEncoder();
-    }
+
 
 
     @Bean

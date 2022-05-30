@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UsuarioServicio extends
         ServicioBase<Usuario, Long, UsuarioRepositorio> {
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     public Optional<Usuario> findByUsername(String username) {
