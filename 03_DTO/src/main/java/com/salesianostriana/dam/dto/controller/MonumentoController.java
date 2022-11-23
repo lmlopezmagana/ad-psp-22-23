@@ -34,7 +34,8 @@ public class MonumentoController {
         } else {
             List<GetMonumentoDto> result =
                     data.stream()
-                    .map(dtoConverter::monumentoToGetMonumentoDto)
+                    //.map(dtoConverter::monumentoToGetMonumentoDto)
+                    .map(GetMonumentoDto::of)
                     .collect(Collectors.toList());
 
             return ResponseEntity
@@ -71,10 +72,13 @@ public class MonumentoController {
 
         nuevo.setCategoria(categoria);
 
+        //nuevo.setCategoria(categoriaRepository.getById(dto.getCategoriaId()));
+
+        nuevo = repository.save(nuevo);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(repository.save(nuevo));
+                .body(nuevo);
 
     }
 

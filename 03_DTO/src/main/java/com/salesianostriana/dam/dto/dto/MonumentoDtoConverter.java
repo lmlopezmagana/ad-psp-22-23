@@ -19,20 +19,20 @@ public class MonumentoDtoConverter {
     }
 
     public GetMonumentoDto monumentoToGetMonumentoDto(Monumento m) {
-        /*return GetMonumentoDto
+        return GetMonumentoDto
                 .builder()
                 .nombre(m.getNombre())
                 .loc(m.getLoc())
                 .ubicacion(String.format("%s (%s)", m.getCiudad(), m.getPais()))
                 .categoria(m.getCategoria().getNombre())
-                .build();*/
+                .build();
 
-        GetMonumentoDto result = new GetMonumentoDto();
+        /*GetMonumentoDto result = new GetMonumentoDto();
         result.setNombre(m.getNombre());
         result.setLoc(m.getLoc());
         result.setUbicacion(String.format("%s (%s)", m.getCiudad(), m.getPais()));
         result.setCategoria(m.getCategoria().getNombre());
-        return result;
+        return result;*/
 
 
 

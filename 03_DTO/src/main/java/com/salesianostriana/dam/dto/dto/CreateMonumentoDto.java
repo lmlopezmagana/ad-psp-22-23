@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class CreateMonumentoDto {
+public class CreateMonumentoDto /*MonumentoRequest*/ {
 
     private String codigoPais;
     private String pais;
