@@ -2,11 +2,11 @@ package com.salesianostriana.dam.dto.controller;
 
 import com.salesianostriana.dam.dto.model.Categoria;
 import com.salesianostriana.dam.dto.model.CategoriaRepository;
-import com.salesianostriana.dam.dto.model.Monumento;
-import com.salesianostriana.dam.dto.model.MonumentoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -26,6 +26,25 @@ public class CategoriaController {
 
     private final CategoriaRepository repository;
 
+    @Operation(summary = "Obtiene todas las categorías")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado categorías",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                {"id": 1, "nombre": "Iglesias"},
+                                                {"id": 2, "nombre": "Románico"}
+                                            ]                                          
+                                            """
+                            )}
+                            )}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ninguna categoría",
+                    content = @Content),
+    })
     @GetMapping("/")
     public ResponseEntity<List<Categoria>> findAll() {
 
@@ -41,7 +60,7 @@ public class CategoriaController {
                 description = "Se ha encontrado la categoría",
                 content = { @Content(mediaType = "application/json",
                         schema = @Schema(implementation = Categoria.class))}),
-            @ApiResponse(responseCode = "400",
+            @ApiResponse(responseCode = "404",
                     description = "No se ha encontrado la categoría por el ID",
                     content = @Content),
     })
