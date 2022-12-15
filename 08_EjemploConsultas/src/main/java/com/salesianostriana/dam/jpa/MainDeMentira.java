@@ -20,6 +20,9 @@ public class MainDeMentira {
                 .nombre("Electrónica")
                 .build();
 
+        categoriaRepositorio.save(c1);
+
+        /*
         Categoria c2 = Categoria.builder()
                 .nombre("Telefonía")
                 //.categoriaPadre(c1)
@@ -58,6 +61,36 @@ public class MainDeMentira {
 
 
         printCategorias(c1);
+        */
+
+
+        Producto p1 = Producto.builder()
+                .nombre("Product 1")
+                .categoria(c1)
+                .pvp(1.0)
+                .build();
+
+        Producto p2 = Producto.builder()
+                .nombre("Product 2")
+                .categoria(c1)
+                .pvp(2.0)
+                .build();
+
+        Producto p3 = Producto.builder()
+                .nombre("Product 3")
+                .categoria(c1)
+                .pvp(3.0)
+                .build();
+
+        productoRepositorio.saveAll(List.of(p1, p2, p3));
+
+        productoRepositorio.findAll();
+
+        List<ProductoDto> dtos = productoRepositorio.findAllConDtoBy();
+
+        dtos.forEach(System.out::println);
+
+        productoRepositorio.findAllConProyeccionBy();
 
 
 
