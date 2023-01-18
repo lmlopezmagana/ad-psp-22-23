@@ -36,9 +36,17 @@ public class PersonSpecification implements Specification<Person> {
                 return criteriaBuilder.like(
                         root.get(searchCriteria.getKey()), "%" + searchCriteria.getValue().toString() + "%"
                 );
-            } else {
+            }
+            // Esta parte es mejorable pero por ahora sirve
+            else if (root.get(searchCriteria.getKey()).getJavaType().toString().equalsIgnoreCase("boolean")) {
+                boolean value = searchCriteria.getValue().toString().equalsIgnoreCase("true") ? true : false;
+                return criteriaBuilder.equal(root.get(searchCriteria.getKey()), value);
+            }else {
                 return criteriaBuilder.equal(root.get(searchCriteria.getKey()), searchCriteria.getValue());
             }
+
+
+
 
         }
 
