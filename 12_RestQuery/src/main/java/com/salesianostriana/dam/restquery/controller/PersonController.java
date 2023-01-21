@@ -33,7 +33,7 @@ public class PersonController {
         List<SearchCriteria> params = new ArrayList<>();
 
         //search=k1:v1,k2<v2,k3>v3
-        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)([\\D\\S-_]+?),"); // \\[w-]+? nos permite que los valores tengan guiones medios, para las fechas
         Matcher matcher = pattern.matcher(search + ",");
 
         while(matcher.find()) {
