@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.restquery.search.spec;
 
 import com.salesianostriana.dam.restquery.model.Person;
+import com.salesianostriana.dam.restquery.search.util.QueryableEntity;
 import com.salesianostriana.dam.restquery.search.util.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -17,7 +18,8 @@ public class PersonSpecificationBuilder {
 
     public Specification<Person> build() {
 
-        List<SearchCriteria> checkedParams = params.stream().filter(p -> Person.checkQueryParam(p.getKey())).collect(Collectors.toList());
+        List<SearchCriteria> checkedParams = params.stream().filter(p -> QueryableEntity.checkQueryParam(Person.class, p.getKey())).collect(Collectors.toList());
+        //List<SearchCriteria> checkedParams = params.stream().filter(p -> Person.checkQueryParam(p.getKey())).collect(Collectors.toList());
 
         if (checkedParams.isEmpty()) {
             return null;
