@@ -4,6 +4,7 @@ package com.salesianostriana.dam.restquery.controller;
 import com.salesianostriana.dam.restquery.model.Person;
 import com.salesianostriana.dam.restquery.repos.PersonRepository;
 import com.salesianostriana.dam.restquery.search.util.SearchCriteria;
+import com.salesianostriana.dam.restquery.search.util.SearchCriteriaExtractor;
 import com.salesianostriana.dam.restquery.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,20 +31,7 @@ public class PersonController {
             @RequestParam(value = "search", defaultValue = "") String search,
             @PageableDefault(size = 20, page = 0) Pageable pageable) {
 
-        List<SearchCriteria> params = new ArrayList<>();
-
-        //search=k1:v1,k2<v2,k3>v3
-        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)([\\D\\S-_]+?),"); // \\[w-]+? nos permite que los valores tengan guiones medios, para las fechas
-        Matcher matcher = pattern.matcher(search + ",");
-
-        while(matcher.find()) {
-            String key = matcher.group(1); // k1:v1 => k1
-            String operator = matcher.group(2); // k1:v1 => :
-            Object value = matcher.group(3); // k1:v1 => v1
-
-            params.add(new SearchCriteria(key, operator, value));
-
-        }
+        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
 
         Page<Person> result = service.search(params, pageable);
 
