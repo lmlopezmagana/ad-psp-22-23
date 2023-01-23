@@ -21,10 +21,10 @@ public class PersonService {
     private final PersonRepository personRepository;
 
     public Page<Person> search(List<SearchCriteria> params, Pageable pageable) {
-        //PersonSpecificationBuilder personSpecificationBuilder =
-        //        new PersonSpecificationBuilder(params);
-        GenericSpecificationBuilder<Person> personSpecificationBuilder =
-                new GenericSpecificationBuilder<>(params);
+        PersonSpecificationBuilder personSpecificationBuilder =
+                new PersonSpecificationBuilder(params);
+        //GenericSpecificationBuilder<Person> personSpecificationBuilder =
+        //        new GenericSpecificationBuilder<>(params, Person.class);
         Specification<Person> spec =  personSpecificationBuilder.build();
         return personRepository.findAll(spec, pageable);
     }

@@ -8,9 +8,13 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PersonSpecificationBuilder {
+public class PersonSpecificationBuilder extends GenericSpecificationBuilder<Person> {
+    public PersonSpecificationBuilder(List<SearchCriteria> params) {
+        super(params, Person.class);
+    }
 
-    private List<SearchCriteria> params;
+
+    /*private List<SearchCriteria> params;
 
     public PersonSpecificationBuilder(List<SearchCriteria> params) {
         this.params = params;
@@ -34,7 +38,7 @@ public class PersonSpecificationBuilder {
         return result;
 
 
-    }
+    }*/
 
 
 }

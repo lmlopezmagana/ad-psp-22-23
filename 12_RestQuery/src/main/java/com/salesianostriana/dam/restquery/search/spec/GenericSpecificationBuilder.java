@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 public class GenericSpecificationBuilder<T> {
 
     private List<SearchCriteria> params;
+    private Class type;
 
     public Specification<T> build() {
         List<SearchCriteria> checkedParams = params.stream()
-                .filter(p -> QueryableEntity.checkQueryParam(Person.class, p.getKey()))
+                .filter(p -> QueryableEntity.checkQueryParam(type, p.getKey()))
                 .collect(Collectors.toList());
 
         if (checkedParams.isEmpty()) {
