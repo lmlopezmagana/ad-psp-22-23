@@ -1,10 +1,13 @@
 package com.salesianostriana.dam.restquery.search.spec;
 
+import com.salesianostriana.dam.restquery.model.Person;
+import com.salesianostriana.dam.restquery.search.util.QueryableEntity;
 import com.salesianostriana.dam.restquery.search.util.SearchCriteria;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class GenericSpecificationBuilder<T> {
@@ -12,7 +15,11 @@ public class GenericSpecificationBuilder<T> {
     private List<SearchCriteria> params;
 
     public Specification<T> build() {
-        if (params.isEmpty()) {
+        List<SearchCriteria> checkedParams = params.stream()
+                .filter(p -> QueryableEntity.checkQueryParam(Person.class, p.getKey()))
+                .collect(Collectors.toList());
+
+        if (checkedParams.isEmpty()) {
             return null;
         }
 
