@@ -24,10 +24,10 @@ public class GenericSpecificationBuilder<T> {
             return null;
         }
 
-        Specification<T> result = new GenericSpecification<T>(params.get(0));
+        Specification<T> result = new GenericSpecification<T>(checkedParams.get(0));
 
-        for(int i = 1; i < params.size(); i++) {
-            result = result.and(new GenericSpecification<T>(params.get(i)));
+        for(int i = 1; i < checkedParams.size(); i++) {
+            result = result.and(new GenericSpecification<T>(checkedParams.get(i)));
         }
 
         return result;
