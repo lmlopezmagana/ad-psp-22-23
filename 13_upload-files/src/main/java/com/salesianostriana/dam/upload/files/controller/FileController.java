@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,11 +24,31 @@ public class FileController {
 
 
 
+    @PostMapping("/upload/files")
+    public ResponseEntity<?> upload(@RequestPart("files") MultipartFile[] files) {
+
+        //FileResponse response = uploadFile(file);
+
+        List<FileResponse> result = Arrays.stream(files)
+                .map(this::uploadFile)
+                .toList();
+
+        return ResponseEntity
+                //.created(URI.create(response.getUri()))
+                .status(HttpStatus.CREATED)
+                .body(result);
+    }
 
 
     @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestPart("file") MultipartFile file) {
 
+        FileResponse response = uploadFile(file);
+
+        return ResponseEntity.created(URI.create(response.getUri())).body(response);
+    }
+
+    private FileResponse uploadFile(MultipartFile file) {
         String name = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -33,15 +56,14 @@ public class FileController {
                 .path(name)
                 .toUriString();
 
-        FileResponse response = FileResponse.builder()
+        return FileResponse.builder()
                 .name(name)
                 .size(file.getSize())
                 .type(file.getContentType())
                 .uri(uri)
                 .build();
-
-        return ResponseEntity.created(URI.create(uri)).body(response);
     }
+
 
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename){
